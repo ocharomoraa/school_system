@@ -4,7 +4,7 @@
 	<title>Brook Hill | Login</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
-<body style="background-color: #EBF5FB;">
+<body style="background-color: #EBF5FB;" >
 
 	<div class="container">
 
@@ -37,12 +37,16 @@
 					
 					  </div>
 
-					  <div class="form-group lead">
-					  	<label for="userType">I'm a :</label>
-					  	<input type="radio" name="userType" value="student" class="custom-radio" required> Student
-					  <input type="radio" name="userType" value="teacher" class="custom-radio" required> Teacher
-					   <input type="radio" name="userType" value="admin" class="custom-radio" required> Admin
-					</div>
+					 <div class="form-group">
+                            <label for="">Role</label>
+                            <center>
+                           <select name="role" id="" class="form-control">
+                               <option value="">Select Your Role</option>
+                               <option value="teacher">Teacher</option>
+                               <option value="student">Student</option>
+                           </select>
+                           </center>
+                       </div>
 
 					   <br><br>
 			  
@@ -50,18 +54,23 @@
 			</form>
 
 			<?php
-				//check if login button has  been clicked
-			if (isset($_POST['login'])) {
-				# code...
-				//capture the form data
+
+
+            if (isset($_POST['login'])) {
+			
 				$email = $_POST['email'];
+				$role= $_POST['role'];
 				$password = $_POST['password'];
+
+				echo "$role";
+				echo "<br>";
+
 
 
 				//connect
 				require('dbconnect.php');
 				//sql
-				$sql = "SELECT * FROM users WHERE email = ?";
+				$sql = "SELECT * FROM users WHERE email = ? AND role=?";
 
 				//use bind
 				//prepare the statement
@@ -70,8 +79,9 @@
 				if ($stmt = mysqli_prepare($conn,$sql)) {
 					# code...
 					//bind
-					mysqli_stmt_bind_param($stmt,"s",$param_email,);
+					mysqli_stmt_bind_param($stmt,"ss",$param_email,$param_role);
 					$param_email = $email;
+					$param_role = $role;
 					//$param_password = $password;
 
 					//execute the query
@@ -100,7 +110,7 @@
 							//sessions
 							session_start();
 							$_SESSION['name']=$record['name'];
-							$_SESSION['id'] = $record['id'];
+							$_SESSION['email'] = $record['email'];
 							$_SESSION['role'] = $record['role'];
 
 						}else{

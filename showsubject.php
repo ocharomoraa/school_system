@@ -9,19 +9,13 @@
 	<div class="container-fluid">
 	<?php 
 			include('nav.php');
-			require('checkloginstatus.php');
-			if ($_SESSION['role']=='student') {
-				# code...
-				echo "You are a student hence cannot access this page";
-				header('location:index.php');
-			}
 
 
 		?>
 		
         <br><br>
 
-		<h2>Our Subjects Offers</h2>
+		<h2>Courses</h2>
 		
       <div class="container-fluid">
 			
@@ -73,14 +67,14 @@
 
 						echo "<tr>";
 						echo "<td>".$record['name']."</td>";
-						echo "<td>
+						/*echo "<td>
 						<form method='POST' action=''>
 							<a href='editsubject.php?id=".$record['id']."' class='btn btn-info'>Edit</a>
 							
 							<input type='hidden' value='".$record['id']."'name='subjectId'>
 							<button type='submit' name='delete' class='btn btn-info' >Delete</button>
 							</form>
-						</td>";
+						</td>";*/
 						echo "</tr>";
 				}
 

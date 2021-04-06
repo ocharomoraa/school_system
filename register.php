@@ -48,12 +48,20 @@
               <input type="password" class="form-control" name="password" required>
           
             </div>
+             <div class="form-group">
+                            <label for="">Role</label>
+                            <center>
+                           <select name="role" id="" class="form-control">
+                               <option value="">Select Your Role</option>
+                               <option value="teacher">Teacher</option>
+                               <option value="student">Student</option>
+                           </select>
+                           </center>
+                       </div>
+<br>
 
-          
-          
 
-        
-        <button name="register" type="submit" class="btn btn-info">Register</button>
+           <button name="register" type="submit" class="btn btn-info">Register</button>
       </form>
 
         <?php
@@ -68,6 +76,8 @@
           $email = $_POST['email'];
           $phone = $_POST['phone'];
           $password = $_POST['password'];
+          $role = $_POST['role'];
+          
 
           //hash the password
           /*password_hash()
@@ -79,29 +89,32 @@
           //
          $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-          insertDataToTable($fullName,$email,$phone,$encryptedPassword,);
+          insertDataToTable($fullName,$email,$phone,$encryptedPassword,$role);
 
         }
 
-        function insertDataToTable($fullName,$email,$phone,$password){
+        function insertDataToTable($fullName,$email,$phone,$password,$role){
           //connection with the db
           require('dbconnect.php');
 
 
 
 
-          $sql = "INSERT INTO `users`(`name`, `email`, `phone`, `password`) VALUES (?,?,?,?)";
+          $sql = "INSERT INTO `users`(`name`, `email`, `phone`, `password`, `role`) VALUES (?,?,?,?,?)";
 
           //prepare the query
           if($stmt = mysqli_prepare($conn,$sql)){
             //bind values
-            mysqli_stmt_bind_param($stmt,"ssss",$param_fullname,$param_email,$param_phone,$param_password);
+            mysqli_stmt_bind_param($stmt,"sssss",$param_fullname,$param_email,$param_phone,$param_password,$param_role);
             //param variables bind them
 
             $param_fullname = $fullName;
             $param_email = $email;
             $param_phone = $phone;
             $param_password = $password;
+            $param_role = $role;
+            
+            
            
 
             //execute the query

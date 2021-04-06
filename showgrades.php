@@ -34,6 +34,8 @@
 			<tr>
 				<td><h5>Name</h5></td>
 				<td><h5>ID</h5></td>
+				<td><h5>Class</h5></td>
+				<td><h5>Subject</h5></td>
 				<td><h5>Score</h5></td>
 			</tr>
 			
@@ -80,6 +82,8 @@
 						echo "<tr>";
 						echo "<td>".$record['name']."</td>";
 						echo "<td>".$record['id']."</td>";
+						echo "<td>".$record['class']."</td>";
+						echo "<td>".$record['subject']."</td>";
 						echo "<td>".$record['score']."</td>";
 					
 						echo "</tr>";
